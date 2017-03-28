@@ -6,16 +6,13 @@ import java.util.*;
 public class BubbleSort {
     public int[] bubbleSort(int[] A, int n) {
         // write code here
-        int max = 0;
         int i = 0; int j = 0;
         for(i = 0; i < n-1; i ++) {
-            max = 0;
             for(j = 1;j < n-i; j ++) {
-                if(A[j] > A[max]) {
-                    max = j;
+                if (A[j] < A[j - 1]) {
+                    swap(A, j, j - 1);
                 }
             }
-            swap(A, max, n-i-1);
         }
         return A;
     }

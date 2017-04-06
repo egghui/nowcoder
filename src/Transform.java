@@ -9,24 +9,30 @@ public class Transform {
         if (lena != lenb) {
             return false;
         }
-        int[] stra = new int[65536];
-        int[] strb = new int[65536];
+        HashMap mapa = new HashMap<Character, Integer>();
+        HashMap mapb = new HashMap<Character, Integer>();
 
-        toStr(stra, A, lena);
-        toStr(strb, B, lenb);
+        toMap(mapa, A, lena);
+        toMap(mapb, B, lenb);
 
-        for (int i = 0; i < 65536; i ++) {
-            if (stra[i] != strb[i]) {
+        Iterator iter = mapa.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (!value.equals(mapb.get(key))) {
                 return false;
             }
         }
         return true;
     }
 
-    public void toStr(int[] strTo, String str, int len) {
+    public void toMap(HashMap<Character, Integer> map, String str, int len) {
         for (int i = 0; i < len; i ++) {
             char c = str.charAt(i);
-            strTo[c] ++;
+            int value = map.get(c)==null ? 0 : map.get(c);
+            map.put(c, ++value);
         }
     }
 }
